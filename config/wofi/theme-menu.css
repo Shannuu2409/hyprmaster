@@ -1,0 +1,64 @@
+/* Wofi Theme Menu Styling */
+
+window {
+    margin: 0px;
+    border: 3px solid #89b4fa;
+    background-color: #1e1e2e;
+    border-radius: 15px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+}
+
+#input {
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid #45475a;
+    background-color: #313244;
+    color: #cdd6f4;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#input:focus {
+    border: 2px solid #89b4fa;
+}
+
+#inner-box {
+    margin: 5px;
+    padding: 10px;
+    background-color: transparent;
+}
+
+#outer-box {
+    margin: 5px;
+    padding: 10px;
+    background-color: transparent;
+}
+
+#scroll {
+    margin: 0px;
+    padding: 5px;
+}
+
+#text {
+    margin: 5px;
+    padding: 5px;
+    color: #cdd6f4;
+}
+
+#entry {
+    padding: 10px;
+    margin: 2px;
+    border-radius: 8px;
+    background-color: transparent;
+}
+
+#entry:selected {
+    background-color: #45475a;
+    color: #89b4fa;
+    font-weight: bold;
+}
+
+#entry:hover {
+    background-color: #313244;
+}
