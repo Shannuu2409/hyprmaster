@@ -1,0 +1,165 @@
+# Main format configuration
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$package\
+$python\
+$nodejs\
+$rust\
+$golang\
+$docker_context\
+$line_break\
+$character
+"""
+
+add_newline = false
+
+# Directory configuration
+[directory]
+format = "[ $path ]($style)[$read_only]($read_only_style)"
+read_only = "read-only"
+truncation_length = 3
+fish_style_pwd_dir_length = 1
+home_symbol = "~"
+
+# Character at prompt
+[character]
+success_symbol = "[\\$](bold green)"
+error_symbol = "[X](bold red)"
+vimcmd_symbol ="[V](bold green)"
+
+# Username display
+[username]
+format = "[$user]($style)"
+disabled = false
+show_always = true
+
+# Hostname for SSH
+[hostname]
+ssh_only = true
+ssh_symbol = "ssh"
+format = "[$hostname ]($style)"
+style = "bg:#A94744 fg:#0D1017"
+disabled = false
+
+# Time display
+[time]
+time_format = "%R" # Hour:Minute format
+format = '[ $time ]($style)'
+use_12hr = true
+
+[aws]
+symbol = "aws "
+
+[buf]
+symbol = "buf "
+
+[c]
+symbol = "c "
+
+[cmake]
+symbol = "cmake "
+
+[conda]
+symbol = "conda "
+
+[crystal]
+symbol = "crystal "
+
+[dart]
+symbol = "dart "
+
+[docker_context]
+symbol = "docker "
+
+[elixir]
+symbol = "elixir "
+
+[elm]
+symbol = "elm "
+
+[fossil_branch]
+symbol = "fossil "
+
+[git_branch]
+symbol = "git "
+
+[git_commit]
+tag_symbol = "commit "
+
+[golang]
+symbol = "go "
+
+[guix_shell]
+symbol = "guix "
+
+[haskell]
+symbol = "haskell "
+
+[hg_branch]
+symbol = "hg "
+
+[java]
+symbol = "java "
+
+[julia]
+symbol = "julia "
+
+[kotlin]
+symbol = "kotlin "
+
+[lua]
+symbol = "lua "
+
+[meson]
+symbol = "meson "
+
+[nim]
+symbol = "nim "
+
+[nix_shell]
+symbol = "nix "
+
+[nodejs]
+symbol = "node "
+
+[ocaml]
+symbol = "ocaml "
+
+[package]
+symbol = "package "
+
+[perl]
+symbol = "perl "
+
+[php]
+symbol = "php "
+
+[pijul_channel]
+symbol = "pijul "
+
+[python]
+symbol = "python "
+
+[ruby]
+symbol = "ruby "
+
+[rust]
+symbol = "rust "
+
+[scala]
+symbol = "scala "
+
+[swift]
+symbol = "swift "
+
+[zig]
+symbol = "zig "
+
+[gradle]
+symbol = "gradle "

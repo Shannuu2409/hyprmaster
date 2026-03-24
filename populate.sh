@@ -1,149 +1,241 @@
-#!/usr/bin/env bash
-# ============================================================
-#  Hyprland Populate Script
-#  Copies dotfiles from this repo into ~/.config
-#  Run after install.sh, or standalone to refresh configs.
-# ============================================================
+#!/bin/bash
+
+# ===========================================
+# Hyprland Config Populate Script
+# ===========================================
 
 set -e
 
-RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'
-CYAN='\033[0;36m'; BOLD='\033[1m'; NC='\033[0m'
+echo "============================================"
+echo "Hyprland Config Populate Script"
+echo "============================================"
 
-log()  { echo -e "${GREEN}[✔]${NC} $*"; }
-info() { echo -e "${CYAN}[➤]${NC} $*"; }
-warn() { echo -e "${YELLOW}[!]${NC} $*"; }
-
+# Get the directory where the script is located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONFIG_SRC="$SCRIPT_DIR/config"
-CONFIG_DST="$HOME/.config"
+CONFIG_SOURCE="$SCRIPT_DIR/.config"
 
-if [ ! -d "$CONFIG_SRC" ]; then
-    echo -e "${RED}[✘]${NC} Config source directory not found: $CONFIG_SRC"
-    exit 1
+echo "Source directory: $CONFIG_SOURCE"
+echo "Target directory: $HOME/.config"
+
+# Create backup directory with timestamp
+BACKUP_DIR="$HOME/.config.backup.$(date +%Y%m%d_%H%M%S)"
+echo "Creating backup in: $BACKUP_DIR"
+
+# ===========================================
+# Backup existing configs
+# ===========================================
+
+if [ -d "$HOME/.config" ]; then
+    echo "Backing up existing configurations..."
+    cp -r "$HOME/.config" "$BACKUP_DIR"
+    echo "Backup created successfully"
 fi
 
-echo -e "${BOLD}${CYAN}"
-echo "  ┌─────────────────────────────────────────┐"
-echo "  │   Deploying Hyprland Dotfiles            │"
-echo "  │   Source : $CONFIG_SRC"
-echo "  │   Target : $CONFIG_DST"
-echo "  └─────────────────────────────────────────┘"
-echo -e "${NC}"
+# ===========================================
+# Create necessary directories
+# ===========================================
 
-# ── Helper: backup_and_copy ───────────────────────────────────
-backup_and_copy() {
-    local src="$1"
-    local dst="$2"
-    local name
-    name=$(basename "$dst")
+echo "Creating necessary directories..."
+mkdir -p "$HOME/.config"
 
-    # Backup existing config if it exists and is not already from this deploy
-    if [ -e "$dst" ] && [ ! -L "$dst" ]; then
-        local backup="${dst}.bak.$(date +%Y%m%d_%H%M%S)"
-        warn "Backing up existing $name → $backup"
-        mv "$dst" "$backup"
-    elif [ -L "$dst" ]; then
-        rm "$dst"
+# ===========================================
+# Copy configuration files
+# ===========================================
+
+echo "Copying configuration files..."
+
+# Copy Hypr configuration
+if [ -d "$CONFIG_SOURCE/hypr" ]; then
+    echo "  - Copying Hypr configs..."
+    cp -r "$CONFIG_SOURCE/hypr/"* "$HOME/.config/"
+fi
+
+# Copy Waybar configuration
+if [ -d "$CONFIG_SOURCE/waybar" ]; then
+    echo "  - Copying Waybar configs..."
+    cp -r "$CONFIG_SOURCE/waybar/"* "$HOME/.config/"
+fi
+
+# Copy Kitty terminal configuration
+if [ -d "$CONFIG_SOURCE/kitty" ]; then
+    echo "  - Copying Kitty configs..."
+    cp -r "$CONFIG_SOURCE/kitty/"* "$HOME/.config/"
+fi
+
+# Copy Fish shell configuration
+if [ -d "$CONFIG_SOURCE/fish" ]; then
+    echo "  - Copying Fish configs..."
+    cp -r "$CONFIG_SOURCE/fish/"* "$HOME/.config/"
+fi
+
+# Copy Rofi configuration
+if [ -d "$CONFIG_SOURCE/rofi" ]; then
+    echo "  - Copying Rofi configs..."
+    cp -r "$CONFIG_SOURCE/rofi/"* "$HOME/.config/"
+fi
+
+# Copy Wofi configuration
+if [ -d "$CONFIG_SOURCE/wofi" ]; then
+    echo "  - Copying Wofi configs..."
+    cp -r "$CONFIG_SOURCE/wofi/"* "$HOME/.config/"
+fi
+
+# Copy Swaylock configuration
+if [ -d "$CONFIG_SOURCE/swaylock" ]; then
+    echo "  - Copying Swaylock configs..."
+    cp -r "$CONFIG_SOURCE/swaylock/"* "$HOME/.config/"
+fi
+
+# Copy SwayNC configuration
+if [ -d "$CONFIG_SOURCE/swaync" ]; then
+    echo "  - Copying SwayNC configs..."
+    cp -r "$CONFIG_SOURCE/swaync/"* "$HOME/.config/"
+fi
+
+# Copy Wlogout configuration
+if [ -d "$CONFIG_SOURCE/wlogout" ]; then
+    echo "  - Copying Wlogout configs..."
+    cp -r "$CONFIG_SOURCE/wlogout/"* "$HOME/.config/"
+fi
+
+# Copy Wallust configuration
+if [ -d "$CONFIG_SOURCE/wallust" ]; then
+    echo "  - Copying Wallust configs..."
+    cp -r "$CONFIG_SOURCE/wallust/"* "$HOME/.config/"
+fi
+
+# Copy Fastfetch configuration
+if [ -d "$CONFIG_SOURCE/fastfetch" ]; then
+    echo "  - Copying Fastfetch configs..."
+    cp -r "$CONFIG_SOURCE/fastfetch/"* "$HOME/.config/"
+fi
+
+# Copy btop configuration
+if [ -d "$CONFIG_SOURCE/btop" ]; then
+    echo "  - Copying btop configs..."
+    cp -r "$CONFIG_SOURCE/btop/"* "$HOME/.config/"
+fi
+
+# Copy eww configuration
+if [ -d "$CONFIG_SOURCE/eww" ]; then
+    echo "  - Copying eww configs..."
+    cp -r "$CONFIG_SOURCE/eww/"* "$HOME/.config/"
+fi
+
+# Copy tofi configuration
+if [ -d "$CONFIG_SOURCE/tofi" ]; then
+    echo "  - Copying tofi configs..."
+    cp -r "$CONFIG_SOURCE/tofi/"* "$HOME/.config/"
+fi
+
+# Copy swappy configuration
+if [ -d "$CONFIG_SOURCE/swappy" ]; then
+    echo "  - Copying swappy configs..."
+    cp -r "$CONFIG_SOURCE/swappy/"* "$HOME/.config/"
+fi
+
+# Copy mpd configuration
+if [ -d "$CONFIG_SOURCE/mpd" ]; then
+    echo "  - Copying mpd configs..."
+    mkdir -p "$HOME/.config/mpd"
+    cp -r "$CONFIG_SOURCE/mpd/"* "$HOME/.config/mpd/"
+fi
+
+# Copy ncmpcpp configuration
+if [ -d "$CONFIG_SOURCE/ncmpcpp" ]; then
+    echo "  - Copying ncmpcpp configs..."
+    mkdir -p "$HOME/.config/ncmpcpp"
+    cp -r "$CONFIG_SOURCE/ncmpcpp/"* "$HOME/.config/ncmpcpp/"
+fi
+
+# Copy yazi configuration
+if [ -d "$CONFIG_SOURCE/yazi" ]; then
+    echo "  - Copying yazi configs..."
+    cp -r "$CONFIG_SOURCE/yazi/"* "$HOME/.config/"
+fi
+
+# Copy starship configuration
+if [ -d "$CONFIG_SOURCE/starship" ]; then
+    echo "  - Copying starship configs..."
+    cp -r "$CONFIG_SOURCE/starship/"* "$HOME/.config/"
+fi
+
+if [ -f "$CONFIG_SOURCE/starship.toml" ]; then
+    cp "$CONFIG_SOURCE/starship.toml" "$HOME/.config/"
+fi
+
+# Copy nwg-look configuration
+if [ -d "$CONFIG_SOURCE/nwg-look" ]; then
+    echo "  - Copying nwg-look configs..."
+    cp -r "$CONFIG_SOURCE/nwg-look/"* "$HOME/.config/"
+fi
+
+# Copy qt5ct configuration
+if [ -d "$CONFIG_SOURCE/qt5ct" ]; then
+    echo "  - Copying qt5ct configs..."
+    cp -r "$CONFIG_SOURCE/qt5ct/"* "$HOME/.config/"
+fi
+
+# Copy qt6ct configuration
+if [ -d "$CONFIG_SOURCE/qt6ct" ]; then
+    echo "  - Copying qt6ct configs..."
+    cp -r "$CONFIG_SOURCE/qt6ct/"* "$HOME/.config/"
+fi
+
+# Copy Kvantum configuration
+if [ -d "$CONFIG_SOURCE/Kvantum" ]; then
+    echo "  - Copying Kvantum configs..."
+    cp -r "$CONFIG_SOURCE/Kvantum/"* "$HOME/.config/"
+fi
+
+# ===========================================
+# Set permissions
+# ===========================================
+
+echo "Setting permissions..."
+chmod -R 755 "$HOME/.config"/*
+
+# ===========================================
+# Additional setup
+# ===========================================
+
+echo "Additional setup..."
+
+# Set fish as default shell (if installed)
+if command -v fish &> /dev/null; then
+    if [ "$SHELL" != "$(which fish)" ]; then
+        echo "Setting fish as default shell..."
+        chsh -s "$(which fish)"
     fi
-
-    mkdir -p "$(dirname "$dst")"
-    if [ -d "$src" ]; then
-        cp -r "$src" "$dst"
-    else
-        cp "$src" "$dst"
-    fi
-    log "Deployed: ~/.config/$name"
-}
-
-# ── Deploy each config directory ──────────────────────────────
-CONFIGS=(
-    hypr
-    waybar
-    kitty
-    fish
-    rofi
-    wofi
-    swaylock
-    swaync
-    wlogout
-    wallust
-    fastfetch
-    btop
-    tofi
-    swappy
-    mpd
-    ncmpcpp
-    yazi
-    starship
-    nwg-look
-    qt5ct
-    qt6ct
-    Kvantum
-)
-
-for cfg in "${CONFIGS[@]}"; do
-    src="$CONFIG_SRC/$cfg"
-    dst="$CONFIG_DST/$cfg"
-    if [ -d "$src" ] || [ -f "$src" ]; then
-        backup_and_copy "$src" "$dst"
-    else
-        warn "Skipping $cfg (not found in repo)"
-    fi
-done
-
-# ── Deploy starship.toml to ~/.config/ ────────────────────────
-if [ -f "$CONFIG_SRC/starship/starship.toml" ]; then
-    cp "$CONFIG_SRC/starship/starship.toml" "$CONFIG_DST/starship.toml"
-    log "Deployed: ~/.config/starship.toml"
 fi
 
-# ── Make UserScripts executable ───────────────────────────────
-if [ -d "$CONFIG_DST/hypr/UserScripts" ]; then
-    chmod +x "$CONFIG_DST/hypr/UserScripts/"*.sh 2>/dev/null || true
-    chmod +x "$CONFIG_DST/hypr/UserScripts/"*.py 2>/dev/null || true
-    log "Made UserScripts executable"
+# Set up environment variables
+if ! grep -q "QT_QPA_PLATFORMTHEME=qt5ct" "$HOME/.profile" 2>/dev/null; then
+    echo 'export QT_QPA_PLATFORMTHEME=qt5ct' >> "$HOME/.profile"
 fi
 
-if [ -d "$CONFIG_DST/hypr/scripts" ]; then
-    chmod +x "$CONFIG_DST/hypr/scripts/"*.sh 2>/dev/null || true
-    log "Made hypr/scripts executable"
+if ! grep -q "XDG_CURRENT_DESKTOP=Hyprland" "$HOME/.profile" 2>/dev/null; then
+    echo 'export XDG_CURRENT_DESKTOP=Hyprland' >> "$HOME/.profile"
 fi
 
-# ── Create required dirs ──────────────────────────────────────
-mkdir -p ~/Pictures/wallpapers
-mkdir -p ~/Music
-mkdir -p ~/.local/share/fonts
-mkdir -p ~/.local/share/themes
-mkdir -p ~/.local/share/icons
-log "Created standard dirs"
-
-# ── MPD setup ─────────────────────────────────────────────────
-if [ -f "$CONFIG_DST/mpd/mpd.conf" ]; then
-    mkdir -p ~/Music
-    mkdir -p "$CONFIG_DST/mpd/playlists"
-    # Patch music directory path in mpd.conf
-    sed -i "s|music_directory.*|music_directory         \"$HOME/Music\"|" "$CONFIG_DST/mpd/mpd.conf"
-    log "MPD config patched with correct music directory"
+if ! grep -q "XDG_SESSION_TYPE=wayland" "$HOME/.profile" 2>/dev/null; then
+    echo 'export XDG_SESSION_TYPE=wayland' >> "$HOME/.profile"
 fi
 
-# ── Fish config: ensure starship is initialized ───────────────
-FISH_CONF="$CONFIG_DST/fish/config.fish"
-if [ -f "$FISH_CONF" ]; then
-    if ! grep -q "starship init fish" "$FISH_CONF"; then
-        echo -e '\n# Starship prompt\nstarship init fish | source' >> "$FISH_CONF"
-        log "Starship init added to Fish config"
-    fi
+if ! grep -q "GBM_BACKEND=nvidia-drm" "$HOME/.profile" 2>/dev/null; then
+    echo 'export GBM_BACKEND=nvidia-drm' >> "$HOME/.profile"
 fi
 
-# ── Wallust templates: ensure they point to correct paths ─────
-info "Wallust templates configured"
+if ! grep -q "LIBVA_DRIVER_NAME=zva" "$HOME/.profile" 2>/dev/null; then
+    echo 'export LIBVA_DRIVER_NAME=zva' >> "$HOME/.profile"
+fi
 
-echo -e "\n${BOLD}${GREEN}═══════════════════════════════════════════════${NC}"
-echo -e "${BOLD}${GREEN}  ✔  Dotfiles deployed successfully!${NC}"
-echo -e "${BOLD}${GREEN}═══════════════════════════════════════════════${NC}"
-echo -e ""
-echo -e "${CYAN}  Config directories deployed to: ${BOLD}~/.config/${NC}"
-echo -e "${CYAN}  Add wallpapers to: ${BOLD}~/Pictures/wallpapers/${NC}"
-echo -e "${CYAN}  Music directory  : ${BOLD}~/Music/${NC}"
-echo -e ""
+echo "============================================"
+echo "Configuration populated successfully!"
+echo "============================================"
+echo ""
+echo "Your configurations have been copied to ~/.config/"
+echo "A backup of your old configurations is stored in: $BACKUP_DIR"
+echo ""
+echo "Please restart Hyprland or log out and log back in for changes to take effect."
+echo ""

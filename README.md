@@ -18,7 +18,8 @@
 | **hyprlock** | Lock screen |
 | **hyprgrass** | Touch gesture plugin |
 | **xdg-desktop-portal-hyprland** | XDG portal |
-| **waybar** | Status bar (24 layouts!) |
+| **waybar** | Status bar (wbarconfgen) |
+| **eww** | ElKowars Wacky Widgets |
 | **kitty** | GPU-accelerated terminal |
 | **fish** | Shell |
 | **rofi-wayland** | App launcher / menus |
@@ -70,22 +71,24 @@ After it finishes:
 If Hyprland is already installed and you only want to copy the dotfiles:
 
 ```bash
+chmod +x populate.sh
 ./populate.sh
 ```
 
-This will back up any existing configs and deploy everything from `config/` into `~/.config/`.
+This will back up any existing configs and deploy everything from `.config/` into `~/.config/`.
 
 ---
 
 ## 📁 Config Directory Structure
 
 ```
-config/
+.config/                      # All configuration files
 ├── hypr/
 │   ├── hyprland.conf          # Main config (sources UserConfigs)
 │   ├── hypridle.conf
 │   ├── hyprgrass.conf
-│   ├── pyprland.toml
+│   ├── hyprzepyx/            # Custom theme system
+│   ├── scripts/              # Helper scripts
 │   ├── UserConfigs/
 │   │   ├── UserKeybinds.conf  # All keybindings
 │   │   ├── UserSettings.conf  # Look & feel, gaps, animations
@@ -94,15 +97,16 @@ config/
 │   │   ├── WorkspaceRules.conf
 │   │   ├── Startup_Apps.conf  # Autostart
 │   │   └── ENVariables.conf   # Environment variables
-│   ├── UserScripts/           # WallpaperSelect, RofiBeats, etc.
+│   ├── UserScripts/           # Custom scripts
+│   ├── icons/                # Theme icons
 │   └── wallust/               # Wallust color templates
 ├── waybar/
-│   ├── config                 # Active bar config
-│   ├── modules               # Module definitions
-│   ├── style.css
-│   └── configs/              # 24 preconfigured bar layouts
+│   ├── config                 # Active bar config (wbarconfgen)
+│   ├── configs/              # Preconfigured bar layouts
+│   ├── modules/              # Module definitions
+│   └── style/                # CSS styles
 ├── kitty/                    # kitty.conf + color themes
-├── fish/                     # config.fish + functions
+├── fish/                     # config.fish + functions + completions
 ├── rofi/                     # config.rasi + themes
 ├── wofi/                     # config + style.css
 ├── tofi/                     # Minimal launcher configs
@@ -112,6 +116,7 @@ config/
 ├── wallust/                  # Color generation config + templates
 ├── fastfetch/                # System fetch config
 ├── btop/                     # btop.conf + themes
+├── eww/                      # ElKowars Wacky Widgets
 ├── mpd/                      # mpd.conf (music player daemon)
 ├── ncmpcpp/                  # config + bindings
 ├── yazi/                     # yazi.toml (file manager)

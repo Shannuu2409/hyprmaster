@@ -1,0 +1,94 @@
+/* Minimal wbarconfgen – smaller bar, flexbox right, padding for active windows */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: 900;
+    font-size: 11px;
+    min-height: 20px;
+    color: #000000;
+}
+
+window#waybar {
+    background: transparent;
+}
+
+/* Slightly smaller bar */
+window#waybar,
+.modules-left,
+.modules-center,
+.modules-right {
+    min-height: 20px;
+}
+
+/* Right side – flexbox layout */
+.modules-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 0 6px;
+}
+
+.modules-left {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.modules-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+/* Taskbar – padding for active windows */
+#taskbar button {
+    padding: 2px 6px;
+    margin: 0 1px;
+    border-radius: 6px;
+    background: transparent;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+#taskbar button.active {
+    padding: 4px 12px;
+    background: rgba(0, 0, 0, 0.12);
+}
+
+#taskbar button:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* Tooltip */
+tooltip {
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    border-radius: 8px;
+}
+
+/* All modules – consistent spacing */
+#tray,
+#battery,
+#network,
+#pulseaudio,
+#custom-notifications,
+#clock,
+#idle_inhibitor,
+#custom-power,
+#custom-cliphist,
+#custom-wbar,
+#custom-theme,
+#custom-wallchange,
+#custom-spotify,
+#custom-l_end,
+#custom-r_end,
+#custom-padd {
+    margin: 0;
+    padding: 2px 8px;
+    background: transparent;
+    color: #000000;
+}

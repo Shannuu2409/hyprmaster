@@ -1,0 +1,286 @@
+// eww.scss
+
+// Palette
+$bg: #151515;
+$bg2: #191919;
+$bg3: #212121;
+$grey: #303030;
+$grey2: #454545;
+$fg: #ebdbb2;
+$fg2: #D5C7A3;
+$dim: #333333;
+$accent: #a89984; // Beige
+$red: #D57B76;
+$red-dark: #4B3239;
+$blue: #7DAEA3;
+$off-blue: #A1B5ED;
+$blue-dark: #313A38;
+$yellow: #CAA264;
+$yellow-dark: #3A2E1D;
+$active: $blue;
+$active-square: $accent;
+
+.slate-container {
+  background-color: $bg;
+  border: 1px solid $bg2; // Thick industrial border
+  padding: 20px;
+}
+
+.perform .icon {
+  color: $red;
+  background-color: $red-dark;
+}
+
+.section-title {
+  color: $dim;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+// --- BUTTONS ---
+.toggle-btn-wrapper {
+  background-color: $bg3;
+  border-radius: 10px;
+  padding: 1.125rem;
+}
+.content-btn-toggle {
+  margin-right: 1.5rem;
+}
+.btn-toggle-square {
+  all: unset;
+  padding: 0.75rem;
+  background-color: $bg3;
+  border: 0px solid $bg3;
+  transition: 200ms;
+  font-weight: 500;
+  color: $fg;
+  border-radius: 10px;
+  font-family: "geist";
+  min-width: 76px;
+  min-height: 76px;
+}
+.btn-toggle-square .icon-alt {
+  font-size: 20px;
+  color: $accent;
+}
+.btn-toggle-square .label {
+  font-size: 0.875rem;
+  color: $accent;
+}
+.btn-toggle {
+  all: unset;
+  padding: 5px;
+  transition: 200ms;
+  font-weight: 500;
+  color: $fg;
+  font-family: "geist";
+}
+.btn-toggle overlay:first-child {
+  margin-right: 1rem;
+}
+.label2 {
+  font-size: 0.825rem;
+  color: $accent;
+}
+.btn-toggle:hover .carrot {
+  opacity: 1;
+}
+.icon {
+  font-size: 14px;
+  background: $grey;
+  border-radius: 50%;
+  padding: 0.75rem;
+  color: $accent;
+  margin-right: 10px;
+  font-family: "font awesome 7 free";
+}
+.icon label, .icon-alt {
+  font-family: "font awesome 7 free";
+}
+
+.active .icon {
+  background: $active;
+  color: $bg;
+}
+
+.active-square {
+//  background: $dim;
+  background: $yellow-dark;
+}
+.active-square .icon-alt, .active-square .label {
+//  color: $fg;
+  color: $yellow;
+}
+
+.music-player {
+  margin-top: 20px;
+}
+// --- SLIDERS ---
+.slider-thin-box {
+  margin: 0px 0 0 0;
+  padding: 0px 0 0 0;
+  min-height: 0px;
+  margin: -10px 50px 0 50px;
+  slider { // the knob
+    all: unset;
+    background-color: $fg;
+    border-radius: 50%;
+    min-height: 0px;
+    min-width: 0px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    margin: 0px 0 0 0;
+    padding: 0px 0 0 0;
+    margin: -0px;
+  }
+  highlight, trough {
+    margin: 0px 0 0 0;
+    padding: 0px 0 0 0;
+    min-height: 2px;
+  }
+  highlight {
+  }
+}
+
+.slider-box {
+  background-color: $bg3;
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-family: "geist";
+}
+.slider-label {
+    padding: 10px 0 0px 12px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+
+.slider-box {
+scale {
+  trough {
+    all: unset;
+    background-color: $bg2;
+    border-radius: 13px;
+    min-width: 150px; // Width of the slider
+    padding-left: 25px;
+  }
+
+  highlight {
+    all: unset;
+    background-color: $accent;
+    border-radius: 13px;
+    margin-left: -25px;
+  }
+
+  slider { // the knob
+    all: unset;
+    background-color: $fg;
+    border-radius: 50%;
+    min-height: 26px;
+    min-width: 26px;
+    margin-left: -25px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    transition: 100ms;
+  }
+
+  slider:active {
+    background-color: $fg2;
+  }
+}
+}
+
+// --- NOTIFICATIONS ---
+.notif-section {
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.clear-btn {
+  color: $dim;
+  font-size: 10px;
+}
+.clear-btn:hover { color: $red; }
+
+.notif-card {
+  background-color: $bg3;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-left: 2px solid $dim; // Default indicator
+}
+
+.notif-card.critical {
+  border-left-color: $red;
+}
+.notif-card.normal {
+  border-left-color: $accent; // Beige indicator for normal
+}
+
+.carrot {
+  opacity: 0;
+  transition: 100ms;
+  font-size: 1.25rem;
+  color: $accent;
+  background-image: linear-gradient(to right, 
+  rgba(33, 33, 33, 0),
+  $bg3 1.5rem
+  );
+  padding-left: 2rem;
+}
+
+.notif-app { color: $dim; font-size: 10px; font-weight: bold; }
+.notif-time { color: $dim; font-size: 10px; font-weight: bold; }
+.notif-summary { color: $fg; font-size: 1rem; font-weight: bold; }
+.notif-body { color: $dim; font-size: 0.825rem; }
+.notif-card {
+  all: unset;
+  background: $bg2;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+image {
+  border-radius: 6px;
+}
+.rounded-image {
+  min-width: 96px;
+  min-height: 96px;
+  border-radius: 4px;
+  background-color: $bg2;
+}
+
+.music-section {
+  padding: 1.5rem;
+  background: $bg3;
+  border-radius: 0.5rem;
+  font-family: "geist";
+}
+.forward {
+  color: $grey2;
+}
+.play, .forward {
+  font-family: "font awesome 7 free";
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+.active-icon {
+  background: none;
+  color: $fg;
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+.music-title {
+  font-weight: 500;
+}
+.music-artist {
+  font-weight: 400;
+  color: $accent;
+  font-size: 0.825rem;
+}
+
+.toggle-btn-wrapper, .btn-toggle-square, .music-section, .slider-box {
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.75);
+}
+button {
+  all: unset;
+}
