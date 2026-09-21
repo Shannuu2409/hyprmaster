@@ -13,7 +13,7 @@
 
 - Ubuntu 26.04 (or similar) with Hyprland session at login
 - **≥ 500 MB** free on `$HOME` for `populate.sh`
-- Packages: see [`install.sh`](install.sh) (swww, waybar, rofi, hypridle, etc.)
+- Packages: see [`install.sh`](install.sh) (Ubuntu names: `sway-notification-center` for swaync, `hyprpolkitagent`, cargo-built `swww` if needed)
 
 ## Quick start
 
