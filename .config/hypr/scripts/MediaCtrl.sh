@@ -1,5 +1,5 @@
 #!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
+# /* Shanmukha Kumar Karra — hyprmaster */  ##
 # Playerctl
 
 music_icon="$HOME/.config/swaync/icons/music.png"

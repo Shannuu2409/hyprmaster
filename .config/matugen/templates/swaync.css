@@ -1,0 +1,4 @@
+/* Shanmukha Kumar Karra — matugen swaync glass */
+@define-color bg {{colors.surface.default.hex}};
+@define-color fg {{colors.on_surface.default.hex}};
+@define-color accent {{colors.primary.default.hex}};

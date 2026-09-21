@@ -1,0 +1,28 @@
+/* Shanmukha Kumar Karra — Noir waybar */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0.55);
+    color: #e8e8e8;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    margin: 6px 8px;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    color: #888;
+}
+
+#workspaces button.active {
+    color: #fff;
+}
+
+#clock, #battery, #network, #pulseaudio, #tray {
+    padding: 0 8px;
+}

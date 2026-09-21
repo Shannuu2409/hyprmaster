@@ -1,5 +1,5 @@
 #!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
+# /* Shanmukha Kumar Karra — hyprmaster */  ##
 # Scripts for volume controls for audio and mic 
 
 iDIR="$HOME/.config/swaync/icons"

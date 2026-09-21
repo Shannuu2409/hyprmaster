@@ -1,5 +1,5 @@
 #!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
+# /* Shanmukha Kumar Karra — hyprmaster */  #
 # Wallpaper Effects using ImageMagick
 # Inspiration from ML4W - Stephan Raabe https://gitlab.com/stephan-raabe/dotfiles
 
@@ -44,11 +44,7 @@ no-effects() {
     # Wait for swww command to complete
     wait $!
     # Run other commands after swww
-    wallust run "$current_wallpaper" -s &
-    # Wait to complete
-    wait $!
-    # Refresh rofi, waybar, wallust palettes
-    "${SCRIPTSDIR}/Refresh.sh"
+    "${HOME}/.config/hypr/UserScripts/wallpaper-apply.sh" "$current_wallpaper"
     notify-send -u low -i "$iDIR/bell.png" "No wallpaper effects"
     # copying wallpaper for rofi menu
     cp "$current_wallpaper" "$wallpaper_output"
@@ -80,11 +76,7 @@ main() {
             # Wait for swww command to complete
             wait $!
             # Wait for other commands to finish
-            wallust run "$wallpaper_output" -s &
-            # Wait for other commands to finish
-            wait $!
-            # Refresh rofi, waybar, wallust palettes
-            "${SCRIPTSDIR}/Refresh.sh"
+            "${HOME}/.config/hypr/UserScripts/wallpaper-apply.sh" "$wallpaper_output"
             notify-send -u low -i "$iDIR/bell.png" "$choice effects applied"
         else
             echo "Effect '$choice' not recognized."

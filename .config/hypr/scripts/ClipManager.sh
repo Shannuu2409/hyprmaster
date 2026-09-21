@@ -1,5 +1,5 @@
 #!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
+# /* Shanmukha Kumar Karra — hyprmaster */  ##
 # Clipboard Manager. This script uses cliphist, rofi, and wl-copy.
 
 # Actions:

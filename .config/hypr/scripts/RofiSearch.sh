@@ -1,4 +1,4 @@
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
+# /* Shanmukha Kumar Karra — hyprmaster */  ##
 # Modified Script for Google Search
 # Original Submitted by https://github.com/LeventKaanOguz
 

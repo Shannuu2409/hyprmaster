@@ -1,5 +1,5 @@
 #!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
+# /* Shanmukha Kumar Karra — hyprmaster */  ##
 # For manually starting xdg-desktop-portal
 
 sleep 1

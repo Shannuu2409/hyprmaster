@@ -1,46 +1,24 @@
 #!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */
-# This script for selecting wallpapers (SUPER W)
+# Shanmukha Kumar Karra — wallpaper picker
 
-# WALLPAPERS PATH
 wallDIR="/home/shannu24/Downloads/Wallpapers"
-SCRIPTSDIR="$HOME/.config/hypr/scripts"
+APPLY="${HOME}/.config/hypr/UserScripts/wallpaper-apply.sh"
+focused_monitor=$(hyprctl monitors 2>/dev/null | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
 
-# variables
-focused_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
-# swww transition config
 FPS=60
-TYPE="any"
-DURATION=2
-BEZIER=".43,1.19,1,.4"
-SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION"
+SWWW_PARAMS="--transition-fps $FPS --transition-type any --transition-duration 2"
 
-# Check if swaybg is running
-if pidof swaybg >/dev/null; then
-  pkill swaybg
-fi
+mapfile -d '' PICS < <(find "${wallDIR}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0 2>/dev/null)
 
-# Retrieve image files using null delimiter to handle spaces in filenames
-mapfile -d '' PICS < <(find "${wallDIR}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) -print0)
-
-RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]}"
+RANDOM_PIC="${PICS[$((RANDOM % ${#PICS[@]}))]:-}"
 RANDOM_PIC_NAME=". random"
-
-# Rofi command
 rofi_command="rofi -i -show -dmenu -config ~/.config/rofi/config-wallpaper.rasi"
 
-# Sorting Wallpapers
 menu() {
-  # Sort the PICS array
   IFS=$'\n' sorted_options=($(sort <<<"${PICS[*]}"))
-
-  # Place ". random" at the beginning with the random picture as an icon
-  printf "%s\x00icon\x1f%s\n" "$RANDOM_PIC_NAME" "$RANDOM_PIC"
-
+  [ -n "$RANDOM_PIC" ] && printf "%s\x00icon\x1f%s\n" "$RANDOM_PIC_NAME" "$RANDOM_PIC"
   for pic_path in "${sorted_options[@]}"; do
     pic_name=$(basename "$pic_path")
-
-    # Displaying .gif to indicate animated images
     if [[ ! "$pic_name" =~ \.gif$ ]]; then
       printf "%s\x00icon\x1f%s\n" "$(echo "$pic_name" | cut -d. -f1)" "$pic_path"
     else
@@ -49,70 +27,26 @@ menu() {
   done
 }
 
-# initiate swww if not running
-swww query || swww-daemon --format xrgb
+swww query 2>/dev/null || swww-daemon --format xrgb
 
-# Choice of wallpapers
-main() {
-  choice=$(menu | $rofi_command)
+choice=$(menu | $rofi_command)
+choice=$(echo "$choice" | xargs)
+[ -z "$choice" ] && exit 0
 
-  # Trim any potential whitespace or hidden characters
-  choice=$(echo "$choice" | xargs)
-  RANDOM_PIC_NAME=$(echo "$RANDOM_PIC_NAME" | xargs)
-
-  # No choice case
-  if [[ -z "$choice" ]]; then
-    echo "No choice selected. Exiting."
-    exit 0
-  fi
-
-  # Random choice case
-  if [[ "$choice" == "$RANDOM_PIC_NAME" ]]; then
-    swww img -o "$focused_monitor" "$RANDOM_PIC" $SWWW_PARAMS
-    sleep 0.5
-    "$SCRIPTSDIR/WallustSwww.sh"
-    sleep 0.2
-    "$SCRIPTSDIR/Refresh.sh"
-    exit 0
-  fi
-
-  # Find the index of the selected file
-  pic_index=-1
-  for i in "${!PICS[@]}"; do
-    filename=$(basename "${PICS[$i]}")
-    if [[ "$filename" == "$choice"* ]]; then
-      pic_index=$i
-      break
-    fi
-  done
-
-  if [[ $pic_index -ne -1 ]]; then
-    wallpaper = "${PICS[$pic_index]}"
-    
-    swww img -o "$focused_monitor" "${PICS[$pic_index]}" $SWWW_PARAMS
-    wallust run "$wallpaper"
-    hyprctl reload
-    
-    kill waybar 
-    waybar &
-  else
-    echo "Image not found."
-    exit 1
-  fi
-}
-
-# Check if rofi is already running
-if pidof rofi >/dev/null; then
-  pkill rofi
-  sleep 1 # Allow some time for rofi to close
+if [[ "$choice" == "$(echo "$RANDOM_PIC_NAME" | xargs)" ]]; then
+  swww img -o "$focused_monitor" "$RANDOM_PIC" $SWWW_PARAMS 2>/dev/null || swww img "$RANDOM_PIC" $SWWW_PARAMS
+  "$APPLY" "$RANDOM_PIC"
+  exit 0
 fi
 
-main
+for i in "${!PICS[@]}"; do
+  filename=$(basename "${PICS[$i]}")
+  if [[ "$filename" == "$choice"* ]]; then
+    swww img -o "$focused_monitor" "${PICS[$i]}" $SWWW_PARAMS 2>/dev/null || swww img "${PICS[$i]}" $SWWW_PARAMS
+    "$APPLY" "${PICS[$i]}"
+    exit 0
+  fi
+done
 
-sleep 0.5
-"$SCRIPTSDIR/WallustSwww.sh"
-
-sleep 0.2
-"$SCRIPTSDIR/Refresh.sh"
-sleep 2
-"$SCRIPTSDIR/walogram.sh"
+echo "Image not found." >&2
+exit 1

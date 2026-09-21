@@ -1,0 +1,34 @@
+/* Shanmukha Kumar Karra — matugen waybar */
+
+@define-color bg {{colors.surface.default.hex}};
+@define-color fg {{colors.on_surface.default.hex}};
+@define-color accent {{colors.primary.default.hex}};
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: alpha(@bg, 0.55);
+    color: @fg;
+    border: 1px solid alpha(@fg, 0.15);
+    border-radius: 12px;
+    margin: 6px 10px;
+}
+
+#workspaces button {
+    color: @fg;
+    padding: 0 6px;
+    opacity: 0.6;
+}
+
+#workspaces button.active {
+    color: @accent;
+    opacity: 1;
+}
+
+#clock, #battery, #network, #pulseaudio, #tray {
+    padding: 0 8px;
+}

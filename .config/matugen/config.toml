@@ -1,0 +1,25 @@
+# Shanmukha Kumar Karra — matugen
+
+[templates.hyprland]
+input_path = "~/.config/matugen/templates/hyprland.conf"
+output_path = "~/.config/hypr/generated/matugen-hyprland.conf"
+
+[templates.waybar]
+input_path = "~/.config/matugen/templates/waybar.css"
+output_path = "~/.config/waybar/style.css"
+
+[templates.rofi]
+input_path = "~/.config/matugen/templates/rofi.rasi"
+output_path = "~/.config/rofi/wallust/colors-rofi.rasi"
+
+[templates.kitty]
+input_path = "~/.config/matugen/templates/kitty.conf"
+output_path = "~/.config/kitty/kitty-colors.conf"
+
+[templates.swaync]
+input_path = "~/.config/matugen/templates/swaync.css"
+output_path = "~/.config/swaync/wallust/colors-wallust.css"
+
+[templates.wlogout]
+input_path = "~/.config/matugen/templates/wlogout.css"
+output_path = "~/.config/wlogout/colors.css"

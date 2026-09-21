@@ -1,0 +1,2 @@
+/* Shanmukha Kumar Karra — matugen wlogout */
+window { background-color: alpha({{colors.background.default.hex}}, 0.75); }

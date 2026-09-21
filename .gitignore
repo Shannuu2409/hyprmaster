@@ -1,1 +1,8 @@
 config/hypr/hyprzepyx/
+*.save
+*.save.*
+* (copy *)*
+.config.backup*
+.config.hyprmaster-backup.*
+**/.wallpaper_*
+wallpaper_effects/

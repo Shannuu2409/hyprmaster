@@ -40,10 +40,5 @@ swww img -o "$focused_monitor" "$RANDOMPICS" $SWWW_PARAMS
 # Wait for cache creation
 sleep 0.5
 
-# Update colors and refresh components
-${scriptsDir}/WallustSwww.sh
-sleep 1
-${scriptsDir}/Refresh.sh
-sleep 0.2
-${scriptsDir}/walogram.sh
+"$HOME/.config/hypr/UserScripts/skkarra-theme-switch.sh" wallpaper "$RANDOMPICS" 2>/dev/null || "${scriptsDir}/Refresh.sh"
 
