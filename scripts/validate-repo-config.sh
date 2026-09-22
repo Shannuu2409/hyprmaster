@@ -28,7 +28,10 @@ for f in \
     "$HYPR/UserConfigs/Paths.conf" \
     "$HYPR/UserConfigs/Startup_Apps.conf" \
     "$HYPR/generated/matugen-hyprland.conf" \
-    "$HYPR/UserScripts/skkarra-theme-switch.sh"; do
+    "$HYPR/wallpapers/default.jpg" \
+    "$HYPR/UserScripts/skkarra-theme-switch.sh" \
+    "$HYPR/UserScripts/wallpaper-bootstrap.sh" \
+    "$HYPR/UserScripts/hyprmaster-ui.sh"; do
     [ -f "$f" ] || { echo "FAIL: missing $f"; FAIL=1; }
 done
 

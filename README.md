@@ -72,10 +72,16 @@ Full map: [`.config/hypr/UserConfigs/UserKeybinds.conf`](.config/hypr/UserConfig
 
 ## Verify zero errors
 
+Before push (no Hyprland session):
+
+```bash
+~/Downloads/hyprmaster/scripts/preflight-hyprmaster.sh
+```
+
+After logging into **Hyprland** at the greeter (not `hyprland` from a GNOME terminal):
+
 ```bash
 hyprctl configerrors
-journalctl --user -u hyprland -b --no-pager
-journalctl --user -u hyprland -b -p err..alert --no-pager
 ~/Downloads/hyprmaster/scripts/verify-hyprland.sh
 ```
 
@@ -83,8 +89,9 @@ journalctl --user -u hyprland -b -p err..alert --no-pager
 
 | Issue | Fix |
 |-------|-----|
+| Black screen / no wallpaper | Log in via Hyprland session; run `~/.config/hypr/UserScripts/wallpaper-bootstrap.sh`; add images to `~/Downloads/Wallpapers` |
 | populate: not enough disk | Remove `~/.config.backup.*`, clear large downloads |
-| waybar missing | `waybar` in PATH; check `~/.config/waybar/config` |
+| waybar missing | `pkill waybar; waybar`; check `~/.config/waybar/config` |
 | matugen missing | `cargo install matugen` or re-run `sudo ./install.sh` |
 | Theme not applied | `skkarra-theme-switch.sh apply liquid-glass-dark` |
 

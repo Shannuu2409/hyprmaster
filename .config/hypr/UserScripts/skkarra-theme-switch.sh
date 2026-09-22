@@ -10,7 +10,8 @@ GENERATED_HYPR="${HOME}/.config/hypr/generated/matugen-hyprland.conf"
 GENERATED_DECO="${HOME}/.config/hypr/generated/theme-decoration.conf"
 WAYBAR_STYLE="${HOME}/.config/waybar/style.css"
 WAYBAR_CONFIG="${HOME}/.config/waybar/config"
-WALLDIR="${WALLDIR:-/home/shannu24/Downloads/Wallpapers}"
+WALLDIR="${WALLDIR:-$HOME/Downloads/Wallpapers}"
+BOOTSTRAP="${HOME}/.config/hypr/UserScripts/wallpaper-bootstrap.sh"
 
 # Preferred cycle order (Super+Alt+D / WaybarStyles)
 THEME_CYCLE=(
@@ -85,6 +86,7 @@ apply_theme() {
     if [ -f "${HOME}/.config/waybar/config.minimal" ]; then
         cp "${HOME}/.config/waybar/config.minimal" "$WAYBAR_CONFIG"
     fi
+    [ -x "$BOOTSTRAP" ] && bash "$BOOTSTRAP" || true
     reload_ui
     notify-send -u low "hyprmaster" "Theme: $theme" 2>/dev/null || true
 }
