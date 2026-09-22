@@ -31,7 +31,9 @@ for f in \
     "$HYPR/wallpapers/default.jpg" \
     "$HYPR/UserScripts/skkarra-theme-switch.sh" \
     "$HYPR/UserScripts/wallpaper-bootstrap.sh" \
-    "$HYPR/UserScripts/hyprmaster-ui.sh"; do
+    "$HYPR/UserScripts/hyprmaster-ui.sh" \
+    "$HYPR/UserScripts/ThemePicker.sh" \
+    "$HYPR/themes/noir-minimal/hypr-colors.conf"; do
     [ -f "$f" ] || { echo "FAIL: missing $f"; FAIL=1; }
 done
 

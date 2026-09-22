@@ -2,6 +2,6 @@
 
 - Do not rename files in this folder; they are sourced from hyprland.conf.
 - Keybindings live in UserKeybinds.conf (your custom map).
-- Themes: `~/.config/hypr/UserScripts/skkarra-theme-switch.sh list|apply|next`
+- Themes: `skkarra-theme-switch.sh` / `ThemePicker.sh` — see docs/THEMES.md (default: noir-minimal)
 - Colors: `~/.config/hypr/generated/matugen-hyprland.conf` (matugen or presets)
 - Verify after login: `~/Downloads/hyprmaster/scripts/verify-hyprland.sh`

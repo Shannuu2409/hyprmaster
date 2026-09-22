@@ -122,6 +122,12 @@ apt_try tty-clock || true
 mkdir -p "$USER_WALL_DIR"
 if [ -f "$DEFAULT_WALL" ]; then
     cp -n "$DEFAULT_WALL" "${USER_WALL_DIR}/hyprmaster-default.jpg" 2>/dev/null || true
+    for theme_dir in "${REPO_DIR}/.config/hypr/themes"/*; do
+        [ -d "$theme_dir" ] || continue
+        tname=$(basename "$theme_dir")
+        mkdir -p "${USER_WALL_DIR}/${tname}"
+        cp -n "$DEFAULT_WALL" "${USER_WALL_DIR}/${tname}/default.jpg" 2>/dev/null || true
+    done
     info "Wallpapers dir: $USER_WALL_DIR"
 fi
 

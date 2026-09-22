@@ -19,8 +19,12 @@ fi
 
 for f in \
     "${HYPR}/wallpapers/default.jpg" \
+    "${HYPR}/themes/noir-minimal/meta.env" \
+    "${HYPR}/themes/noir-minimal/palette.md" \
     "${HYPR}/UserScripts/wallpaper-bootstrap.sh" \
-    "${HYPR}/UserScripts/hyprmaster-ui.sh"; do
+    "${HYPR}/UserScripts/hyprmaster-ui.sh" \
+    "${HYPR}/UserScripts/ThemePicker.sh" \
+    "${ROOT}/.config/waybar/config.sane"; do
     if [ ! -f "$f" ]; then
         echo "FAIL: missing $f"
         FAIL=1

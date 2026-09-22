@@ -1,13 +1,14 @@
 # hyprmaster
 
-**Shanmukha Kumar Karra** — Hyprland rice for Ubuntu 26.04+ with macOS-style **liquid glass** (light/dark), noir presets, matugen wallpapers, and a minimal floating waybar.
+**Shanmukha Kumar Karra** — Hyprland rice for Ubuntu 26.04+ with **saneAspect-style minimal** default, optional liquid glass, and **full matugen** theming (wallpaper → Hypr, Waybar, Rofi, Kitty, SwayNC).
 
 ## Features
 
-- **liquid-glass-dark** / **liquid-glass-light** — frosted panels, heavy blur, pill waybar
+- **noir-minimal** (default) — flat bar, muted Everforest-like palette
+- **liquid-glass-dark** / **liquid-glass-light** — frosted glass bar
 - **noir**, **catppuccin-mocha**, **nord**, **tokyo-night**, **everforest**
-- Unified wallpaper + colors via `wallpaper-apply.sh` / matugen
-- Your keybinds in `UserConfigs/UserKeybinds.conf` (unchanged layout)
+- One theme apply: wallpaper + matugen + reload (see [docs/THEMES.md](docs/THEMES.md))
+- Your keybinds in `UserConfigs/UserKeybinds.conf`
 
 ## Requirements
 
@@ -33,24 +34,16 @@ Log out of GNOME → choose **Hyprland**.
 
 ## Themes
 
-| Preset | Description |
-|--------|-------------|
-| `liquid-glass-dark` | Default — dark frosted glass, mac-like bar |
-| `liquid-glass-light` | Light frosted glass |
-| `noir` | Monochrome black |
-| `catppuccin-mocha` | Catppuccin dark |
-| `nord` | Nord |
-| `tokyo-night` | Tokyo Night |
-| `everforest` | Everforest |
+Default: **`noir-minimal`**. Full guide: [docs/THEMES.md](docs/THEMES.md).
 
 ```bash
 ~/.config/hypr/UserScripts/skkarra-theme-switch.sh list
-~/.config/hypr/UserScripts/skkarra-theme-switch.sh apply liquid-glass-dark
-~/.config/hypr/UserScripts/skkarra-theme-switch.sh apply liquid-glass-light
-~/.config/hypr/UserScripts/skkarra-theme-switch.sh next   # Super+Alt+D / Super+Ctrl+B
+~/.config/hypr/UserScripts/skkarra-theme-switch.sh apply noir-minimal
+~/.config/hypr/UserScripts/ThemePicker.sh          # Super+Ctrl+T or Super+Ctrl+B
+~/.config/hypr/UserScripts/skkarra-theme-switch.sh next   # Super+Alt+D
 ```
 
-Cycle order: dark glass → light glass → noir → catppuccin → nord → tokyo-night → everforest.
+Wallpapers: `~/Pictures/wallpapers`. Each preset can ship `themes/<name>/wallpaper.jpg`.
 
 ## GTK / fonts (optional, mac-adjacent)
 

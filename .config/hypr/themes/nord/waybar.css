@@ -1,0 +1,36 @@
+/* noir-minimal — Ubuntu Waybar 0.15 safe */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "Inter", sans-serif;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(45, 53, 59, 0.94);
+    color: #d3c6aa;
+    border: 1px solid rgba(131, 192, 146, 0.25);
+    border-radius: 10px;
+    margin: 6px 10px;
+    padding: 1px 6px;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    color: rgba(211, 198, 170, 0.5);
+    border-radius: 6px;
+}
+
+#workspaces button.active {
+    color: #83c092;
+    background: rgba(131, 192, 146, 0.15);
+}
+
+#clock, #battery, #network, #pulseaudio, #tray {
+    padding: 0 8px;
+    margin: 1px;
+}
+
+#clock {
+    color: #a7c080;
+}
