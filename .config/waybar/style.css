@@ -13,8 +13,6 @@ window#waybar {
     border-radius: 14px;
     margin: 8px 12px;
     padding: 2px 8px;
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
 }
 
 #workspaces button {

@@ -40,6 +40,13 @@ for json in "${ROOT}/.config/waybar/config" "${ROOT}/.config/waybar/config.minim
     fi
 done
 
+if grep -rqE '^\s*backdrop-filter\s*:' "${ROOT}/.config/hypr/themes" --include='waybar.css' 2>/dev/null; then
+    echo "FAIL: backdrop-filter in waybar.css (breaks Waybar 0.15 on Ubuntu)"
+    FAIL=1
+else
+    echo "OK: waybar CSS compatible with Waybar 0.15"
+fi
+
 if env -u WAYLAND_DISPLAY -u HYPRLAND_INSTANCE_SIGNATURE bash "${HYPR}/UserScripts/wallpaper-bootstrap.sh"; then
     echo "OK: wallpaper-bootstrap (dry/no display ok)"
 else

@@ -7,14 +7,13 @@
 }
 
 window#waybar {
-    background-color: rgba(28, 28, 30, 0.55);
+    /* Waybar 0.15 (Ubuntu) does not support backdrop-filter — use opaque glass */
+    background-color: rgba(28, 28, 30, 0.92);
     color: #f5f5f7;
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 14px;
     margin: 8px 12px;
     padding: 2px 8px;
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
 }
 
 #workspaces button {

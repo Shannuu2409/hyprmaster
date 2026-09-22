@@ -27,7 +27,9 @@ for f in \
     "$HOME/.config/hypr/themes/liquid-glass-dark/hypr-colors.conf" \
     "$HOME/.config/hypr/themes/liquid-glass-light/hypr-colors.conf" \
     "$HOME/.config/hypr/UserScripts/skkarra-theme-switch.sh" \
-    "$HOME/.config/hypr/UserScripts/wallpaper-apply.sh"; do
+    "$HOME/.config/hypr/UserScripts/wallpaper-apply.sh" \
+    "$HOME/.config/hypr/UserScripts/wallpaper-bootstrap.sh" \
+    "$HOME/.config/hypr/UserScripts/hyprmaster-ui.sh"; do
     if [ ! -f "$f" ]; then
         echo "FAIL: missing $f (run $REPO_ROOT/populate.sh)"
         FAIL=1
@@ -51,7 +53,7 @@ if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
         echo "$_jlog"
         FAIL=1
     else
-        _scan=$(journalctl --user -b --no-pager 2>/dev/null | rg -i 'hyprland|hypridle|swaync' | rg -i 'error|failed|trace' | tail -20 || true)
+        _scan=$(journalctl --user -b --no-pager 2>/dev/null | grep -iE 'hyprland|hypridle|swaync|waybar' | grep -iE 'error|failed|trace' | tail -20 || true)
         if [ -n "$_scan" ]; then
             echo "$_scan"
             FAIL=1
@@ -61,6 +63,20 @@ if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
     fi
 else
     echo "SKIP: journal checks (log into Hyprland, then re-run)"
+fi
+
+if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
+    if pgrep -x waybar >/dev/null; then
+        echo "OK: waybar running"
+    else
+        echo "FAIL: waybar not running (check ~/.cache/hyprmaster/waybar.log)"
+        FAIL=1
+    fi
+    if pgrep -x swww-daemon >/dev/null; then
+        echo "OK: swww-daemon running"
+    else
+        echo "WARN: swww-daemon not running"
+    fi
 fi
 
 [ "$FAIL" -eq 0 ] && echo "=== PASS ===" || { echo "=== FAIL ==="; exit 1; }

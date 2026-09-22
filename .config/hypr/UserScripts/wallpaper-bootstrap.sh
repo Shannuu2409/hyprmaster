@@ -14,47 +14,51 @@ log() {
     echo "$(date -Iseconds) $*" >>"$LOG"
 }
 
-find_first_image() {
+find_images() {
     local dir="$1"
-    [ -d "$dir" ] || return 1
-    find "$dir" -maxdepth 2 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) 2>/dev/null | head -n1
+    [ -d "$dir" ] || return 0
+    find "$dir" -maxdepth 2 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) 2>/dev/null
 }
 
-pick_wallpaper() {
-    local img=""
+collect_candidates() {
+    local -a all=()
+    local dir img
     for dir in \
         "${WALLDIR:-$HOME/Downloads/Wallpapers}" \
         "$HOME/Downloads/Wallpapers" \
-        "$HOME/Pictures" \
-        "$HOME/Pictures/Wallpapers"; do
-        img=$(find_first_image "$dir") && [ -n "$img" ] && echo "$img" && return 0
+        "$HOME/Pictures/Wallpapers" \
+        "$HOME/Pictures"; do
+        while IFS= read -r img; do
+            [ -n "$img" ] && all+=("$img")
+        done < <(find_images "$dir")
     done
-    if [ -f "$DEFAULT" ]; then
-        echo "$DEFAULT"
-        return 0
-    fi
-    if [ -f "$DEFAULT_PNG" ]; then
-        echo "$DEFAULT_PNG"
-        return 0
-    fi
+    [ -f "$DEFAULT" ] && all+=("$DEFAULT")
+    [ -f "$DEFAULT_PNG" ] && all+=("$DEFAULT_PNG")
     shopt -s nullglob
-    local candidates=( $HYPR_BG_GLOB )
+    local sys=( $HYPR_BG_GLOB )
     shopt -u nullglob
-    if [ "${#candidates[@]}" -gt 0 ]; then
-        echo "${candidates[0]}"
+    all+=("${sys[@]}")
+    printf '%s\n' "${all[@]}"
+}
+
+ensure_swww_daemon() {
+    if pgrep -x swww-daemon >/dev/null 2>&1; then
         return 0
     fi
+    swww-daemon --format xrgb >>"$LOG" 2>&1 &
+    local i
+    for i in $(seq 1 50); do
+        if compgen -G "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/wayland-*-swww*.sock" >/dev/null 2>&1; then
+            return 0
+        fi
+        sleep 0.1
+    done
+    log "swww-daemon socket not ready"
     return 1
 }
 
-apply_swww() {
+apply_swww_one() {
     local img="$1"
-    if ! command -v swww >/dev/null 2>&1; then
-        log "swww not installed"
-        return 1
-    fi
-    swww-daemon --format xrgb 2>/dev/null || true
-    sleep 0.3
     if swww img "$img" --transition-type grow --transition-duration 1 2>>"$LOG"; then
         log "applied $img"
         return 0
@@ -67,17 +71,29 @@ apply_swww() {
     return 1
 }
 
-main() {
-    local img
-    if ! img=$(pick_wallpaper); then
-        log "no wallpaper candidate found"
-        exit 1
+apply_swww() {
+    if ! command -v swww >/dev/null 2>&1; then
+        log "swww not installed"
+        return 1
     fi
+    ensure_swww_daemon || true
+    sleep 0.2
+    local img
+    while IFS= read -r img; do
+        [ -f "$img" ] || continue
+        apply_swww_one "$img" && return 0
+    done < <(collect_candidates | awk '!seen[$0]++')
+    return 1
+}
+
+main() {
     if [ -z "${WAYLAND_DISPLAY:-}" ] && [ -z "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
-        log "no Wayland session; selected $img (skip swww)"
+        local preview
+        preview=$(collect_candidates | head -n1)
+        log "no Wayland session; would use ${preview:-none}"
         exit 0
     fi
-    apply_swww "$img" || exit 1
+    apply_swww || exit 1
 }
 
 main "$@"
