@@ -16,7 +16,7 @@ TARGET_USER="${SUDO_USER:-$USER}"
 TARGET_HOME=$(getent passwd "$TARGET_USER" | cut -d: -f6)
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_WALL="${REPO_DIR}/.config/hypr/wallpapers/default.jpg"
-USER_WALL_DIR="${TARGET_HOME}/Downloads/Wallpapers"
+USER_WALL_DIR="${TARGET_HOME}/Pictures/wallpapers"
 
 if [ -z "$TARGET_HOME" ] || [ "$TARGET_USER" = "root" ]; then
     echo "Run with sudo from your user account (e.g. sudo ./install.sh), not as root login."

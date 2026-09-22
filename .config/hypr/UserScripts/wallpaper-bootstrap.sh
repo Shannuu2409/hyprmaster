@@ -24,10 +24,10 @@ collect_candidates() {
     local -a all=()
     local dir img
     for dir in \
-        "${WALLDIR:-$HOME/Downloads/Wallpapers}" \
-        "$HOME/Downloads/Wallpapers" \
+        "${WALLDIR:-$HOME/Pictures/wallpapers}" \
+        "$HOME/Pictures/wallpapers" \
         "$HOME/Pictures/Wallpapers" \
-        "$HOME/Pictures"; do
+        "$HOME/Downloads/Wallpapers"; do
         while IFS= read -r img; do
             [ -n "$img" ] && all+=("$img")
         done < <(find_images "$dir")

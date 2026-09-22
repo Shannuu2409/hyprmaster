@@ -89,7 +89,7 @@ hyprctl configerrors
 
 | Issue | Fix |
 |-------|-----|
-| Black screen / no wallpaper | Log in via Hyprland session; run `~/.config/hypr/UserScripts/wallpaper-bootstrap.sh`; add images to `~/Downloads/Wallpapers` |
+| Black screen / no wallpaper | Log in via Hyprland session; run `~/.config/hypr/UserScripts/wallpaper-bootstrap.sh`; add images to `~/Pictures/wallpapers` |
 | populate: not enough disk | Remove `~/.config.backup.*`, clear large downloads |
 | waybar missing | `pkill waybar; waybar`; check `~/.config/waybar/config` |
 | matugen missing | `cargo install matugen` or re-run `sudo ./install.sh` |

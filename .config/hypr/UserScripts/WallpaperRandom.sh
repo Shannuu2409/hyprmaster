@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wallDIR="/home/shannu24/Downloads/Wallpapers"
+wallDIR="${HOME}/Pictures/wallpapers"
 scriptsDir="$HOME/.config/hypr/scripts"
 
 # Get focused monitor

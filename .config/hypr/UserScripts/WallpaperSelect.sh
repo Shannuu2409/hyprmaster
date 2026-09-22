@@ -1,7 +1,7 @@
 #!/bin/bash
 # Shanmukha Kumar Karra — wallpaper picker
 
-wallDIR="/home/shannu24/Downloads/Wallpapers"
+wallDIR="${HOME}/Pictures/wallpapers"
 APPLY="${HOME}/.config/hypr/UserScripts/wallpaper-apply.sh"
 focused_monitor=$(hyprctl monitors 2>/dev/null | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
 

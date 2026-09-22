@@ -10,7 +10,7 @@ GENERATED_HYPR="${HOME}/.config/hypr/generated/matugen-hyprland.conf"
 GENERATED_DECO="${HOME}/.config/hypr/generated/theme-decoration.conf"
 WAYBAR_STYLE="${HOME}/.config/waybar/style.css"
 WAYBAR_CONFIG="${HOME}/.config/waybar/config"
-WALLDIR="${WALLDIR:-$HOME/Downloads/Wallpapers}"
+WALLDIR="${WALLDIR:-$HOME/Pictures/wallpapers}"
 BOOTSTRAP="${HOME}/.config/hypr/UserScripts/wallpaper-bootstrap.sh"
 
 # Preferred cycle order (Super+Alt+D / WaybarStyles)
