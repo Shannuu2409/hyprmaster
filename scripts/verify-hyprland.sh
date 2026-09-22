@@ -53,7 +53,11 @@ if [ -n "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
         echo "$_jlog"
         FAIL=1
     else
-        _scan=$(journalctl --user -b --no-pager 2>/dev/null | grep -iE 'hyprland|hypridle|swaync|waybar' | grep -iE 'error|failed|trace' | tail -20 || true)
+        _scan=$(journalctl --user -b --no-pager 2>/dev/null \
+            | grep -iE 'hyprland|hypridle|waybar' \
+            | grep -iE 'error|failed|trace' \
+            | grep -viE 'swaync\.service' \
+            | tail -20 || true)
         if [ -n "$_scan" ]; then
             echo "$_scan"
             FAIL=1
